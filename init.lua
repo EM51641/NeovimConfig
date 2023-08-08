@@ -19,3 +19,17 @@ end
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
 require "plugins"
+
+-- Change the colorscheme
+vim.cmd "colorscheme tokyonight"
+
+-- Enable providers
+local enable_providers = {
+      "python3_provider",
+    }
+
+for _, plugin in pairs(enable_providers) do
+  vim.g["loaded_" .. plugin] = nil
+  vim.cmd("runtime " .. plugin)
+end
+

@@ -18,7 +18,7 @@ M.config = function()
   -- diagnostics appeared/became resolved
   vim.opt.signcolumn = "yes"
 
-  local keyset = vim.keymap.set
+  local keyset = vim.api.nvim_set_keymap
   -- Autocomplete
   function _G.check_back_space()
     local col = vim.fn.col "." - 1
@@ -39,7 +39,7 @@ M.config = function()
   keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
   -- Use <c-j> to trigger snippets
-  keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
+  keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)", opts)
   -- Use <c-space> to trigger completion
   keyset("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
 

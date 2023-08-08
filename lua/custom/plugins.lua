@@ -3,16 +3,32 @@ local plugins = {
     import = "custom.configs.coc",
   },
   {
-    "vim-airline/vim-airline",
+    import = "custom.configs.tokyonight",
+  },
+  {
+    "tpope/vim-fugitive",
     lazy = false,
   },
   {
-    "preservim/tagbar",
+    import = "custom.configs.chatgpt",
+  },
+  {
+    "github/copilot.vim",
     lazy = false,
+    config = function()
+      local opts = { silent = true }
+      local keymap = vim.api.nvim_set_keymap
+      vim.cmd [[imap <script><silent><nowait><expr> <C-a> copilot#Accept()]]
+      vim.g.copilot_not_tab_map = true
+      keymap("i", "<C-n>", "<Plug>(copilot-next)", opts)
+      keymap("i", "<C-p>", "<Plug>(copilot-previous)", opts)
+    end,
+  },
+  {
+    import = "custom.configs.tagbar",
   },
   {
     "neovim/nvim-lspconfig",
-
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
